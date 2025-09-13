@@ -34,10 +34,9 @@ export default function Home() {
 
       <section style={{marginTop:30, textAlign:"center"}}>
         <a href="/pitchdeck.pdf" download>
-          <button style={{padding:"12px 22px", fontSize:16, borderRadius:8, cursor:"pointer", marginRight:12}}>
-            📥 Download Pitch Deck
-          </button>
-        </a>
+  <button>📥 Download Pitch Deck</button>
+</a>
+
         <Link to="/demo">
           <button style={{padding:"12px 22px", fontSize:16, borderRadius:8, cursor:"pointer"}}>
             🚀 Try the Demo
