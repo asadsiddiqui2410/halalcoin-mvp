@@ -109,6 +109,29 @@ app.post('/api/register', async (req,res)=>{
   res.send({token, user:{id,email,wallet:walletId}});
 });
 
+// Login route
+app.post('/api/login', (req, res) => {
+  const { email, password } = req.body;
+
+  db.get('SELECT * FROM users WHERE email = ?', [email], (err, user) => {
+    if (err) return res.status(500).json({ error: 'db_error' });
+    if (!user) return res.status(400).json({ error: 'invalid_user' });
+
+    // For demo: simple password check (plain text)
+    if (user.password !== password) {
+      return res.status(400).json({ error: 'invalid_password' });
+    }
+
+    // Generate token
+    const token = jwt.sign({ id: user.id, email: user.email }, SECRET, {
+      expiresIn: '1h',
+    });
+
+    res.json({ token, user });
+  });
+});
+
+
 // login
 app.post('/api/login', async (req,res)=>{
   const {email,password} = req.body;
